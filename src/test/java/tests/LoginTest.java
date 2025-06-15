@@ -1,3 +1,4 @@
+
 package tests;
 
 import static org.junit.Assert.fail;
@@ -10,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.LoginPage;
 
-//TC-001. Verify login functionality on Mercury Tours
+//TC-001. Verify login successfully on Mercury Tours
 public class LoginTest {
 
 	WebDriver driver;
