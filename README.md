@@ -9,3 +9,4 @@ This is an automated test using Selenium and Java, following the Page Object Mod
 ## Test Case
 ✅ TC-001: Verify login successfully on Mercury Tours
 ✅ TC-002: Verify register successfully with valid information.
+
