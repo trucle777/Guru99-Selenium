@@ -1,21 +1,22 @@
 package pages;
 
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import java.time.Duration;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import pages.LoginPage;
-
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class RegisterPage {
 
 	private By registerTab = By.linkText("REGISTER");
-	private By submitButton = By.name("submit");
-
+	public By submitButton = By.name("submit");
+	public By closePopupButton = By.xpath("//div[@class='cb-close']");
+	
 	public By firstNameField = By.name("firstName");
 	public By lastNameField = By.name("lastName");
 	public By phoneField = By.name("phone");
@@ -34,30 +35,38 @@ public class RegisterPage {
 	public RegisterPage(WebDriver driver) {
 		this.driver = driver;
 	}
-	
-	public void clickRegister() {
+	public void clickRegisterTab() {
 		driver.findElement(registerTab).click();
 	}
+	public void closePopupIfAny() {
+		try { 
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+			WebElement closeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(closePopupButton));
+			closeButton.click();
+			}
+			catch(Exception e){
+				System.out.println();
+			}
+		}
 	
 	public void inputText(By element, String value) {
+		closePopupIfAny();
 		driver.findElement(element).sendKeys(value);
 	}
 	
-	public void clickCountryDropdown() {
-		driver.findElement(countryDropdown).click();
+	public void clickButton(By element) {
+		driver.findElement(element).click();
 	}
 	
-	public void clickSubmitRegister() {
-		driver.findElement(submitButton).click();
-	}
-	
+	 public void selectCountry(String countryName) {
+	        WebElement dropdown = driver.findElement(countryDropdown);
+	        Select select = new Select(dropdown);
+	        select.selectByVisibleText(countryName);
+	    }
+	 
 	public String getSuccessRegisterSMS() {
 		return driver.findElement(successRegisterSMS).getText();
 	}
 	
 	
-	
-
-	
-
-}
+	}
